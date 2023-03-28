@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="kz.kuz.internalstoragewithonresume">
+
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="false"/>
+    <!--
+    uses-feature указывает, что в приложении используется камера, это необходимо для Google Play
+    android:required="false" указывает, что для установки приложения наличие камеры на устройстве
+    не обязательно
+    таким образом Google Play уведомляется, что приложение может работать без камеры, но некоторые
+    функции будут недоступными
+    -->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FragmentApplication">
+        <activity
+            android:name="kz.kuz.internalstoragewithonresume.MainActivity"
+            android:label="@string/main_title"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <provider
+            android:authorities="kz.kuz.fragmentapplication.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <!--
+            exported="false" запрещает использование провайдера сторонам, которым не предоставлено
+            разрешение
+            grantUriPermissions="true" даёт возможность другим приложениям право записи по URI
+            -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/files"/>
+        </provider>
+    </application>
+
+</manifest>
